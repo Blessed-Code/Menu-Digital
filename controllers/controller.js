@@ -25,9 +25,8 @@ class Controller {
 
     static pageOrders(req, res){
         // console.log(req.params)
-        const { UserId } = req.params
-        const { memberCard } = req.query
-
+        const UserId = req.session.userId
+        // console.log(UserId)
         const option = {
             where: {
                 UserId: +UserId
@@ -45,32 +44,26 @@ class Controller {
 
         MemberCard.findOne(option)
             .then((member) => {
-                if(memberCard){
-                    MemberCard.update({type: "Gold"}, {
-                        where: {
-                            UserId: +UserId
-                        }
-                    })
-                }
-                res.render('orders', {member, UserId, finalPrice})
+                res.render('orders', {member, finalPrice})
             })
             .catch((err) => {
                 res.send(err)
             })
     }
     static newOrder(req, res){
-        const { UserId } = req.params
+        const UserId = req.session.userId
 
         Order.create({UserId: +UserId, status: "uncompleted"})
             .then((order) => {
-                res.redirect(`/${UserId}/order/${order.id}`)
+                res.redirect(`/order/${order.id}`)
             })
             .catch((err) => {
                 res.send(err)
             })
     }
     static pageMenu(req, res){
-        const { UserId, OrderId } = req.params
+        const UserId = req.session.userId
+        const { OrderId } = req.params
         let { err, category } = req.query
         // console.log(err)
         let option = {}
@@ -93,7 +86,7 @@ class Controller {
     }
     
     static createOrderMenu(req, res){
-        const { UserId, OrderId } = req.params
+        const { OrderId } = req.params
         const { MenuId } = req.body
 
         OrderMenu.create({
@@ -101,7 +94,7 @@ class Controller {
             MenuId: +MenuId
         })
             .then(() => {
-                res.redirect(`/${UserId}/order/${OrderId}`)
+                res.redirect(`/order/${OrderId}`)
             })
             .catch((err) => {
                 res.send(err)
@@ -109,8 +102,9 @@ class Controller {
     }
 
     static updateOrder(req, res){
-        const { UserId, OrderId } = req.params
-        const err = `You have to order first to checkout`
+        const UserId = req.session.userId
+
+        const { OrderId } = req.params
         
         let memberType
         OrderMenu.findOne({
@@ -120,7 +114,7 @@ class Controller {
         })
             .then((orderMenu) => {
                 if(!orderMenu){
-                    res.redirect(`/${UserId}/order/${OrderId}/?err=${err}`)
+                    res.redirect(`/order/${OrderId}/?err=err`)
                 }
                 return MemberCard.findOne({
                     where: {
@@ -149,7 +143,7 @@ class Controller {
                 })
             })
             .then(() => {
-                res.redirect(`/${UserId}/order`)
+                res.redirect(`/order`)
             })
             .catch((err) => {
                 res.send(err)
@@ -157,7 +151,7 @@ class Controller {
     }
 
     static cancelOrder(req, res){
-        const { UserId, OrderId } = req.params
+        const { OrderId } = req.params
 
         Order.destroy({
             where: {
@@ -165,7 +159,23 @@ class Controller {
             }
         })
             .then(() => {
-                res.redirect(`/${UserId}/order`)
+                res.redirect(`/order`)
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    }
+
+    static updateMember(req, res){
+        const UserId = req.session.userId
+        
+        MemberCard.update({type: "Gold"}, {
+            where: {
+                UserId: +UserId
+            }
+        })
+            .then(() => {
+                res.redirect('/order')
             })
             .catch((err) => {
                 res.send(err)
