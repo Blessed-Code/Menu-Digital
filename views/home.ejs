@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Order</title>
-</head>
-<body>
-    <h1>This is the homepage</h1>
-    <hr>
-    <h2>Login/Register</h2>
+    <%- include('partials/head', {title: "Registrasi User"}); %>
+<body style="background-color: rgba(0, 0, 0, 0.08);">
+    <%- include('partials/navbar', {role: ""}); %>
+    <div style="margin: 200px 400px;">
+        <div class="row">
+            <div class="col-6 mt-3 mb-auto">
+                <h1 style="font-size: 50px;">MenuDigital</h1>
+                <h3>Buat pemesanan</h3>
+                <h3>makanan menjadi mudah.</h3>
+                <figure>
+                    <h5>Cuma tinggal membuka aplikasi MenuDigital lihat menunya, pesan, dapatkan!</h5>
+                </figure>
+                <div>
+                    <a href="/register" class="btn btn-success">Register</a>
 
-    <h4>Login Form</h4>
-    <form action="/" method="get">
-       <p>
-           Email<br/>
-           <input type="text" name="email">
-       </p>
-       <button type="submit">Login</button>
-    </form>
+                    <a href="/login" class="btn btn-outline-secondary">Login</a>
+                </div>
+            </div>
+            <div class="col-6">
+                <img src="https://cdn.discordapp.com/attachments/968430984414498846/979445057180540928/unknown.png" height="350px">
+            </div>
+        </div>
+    </div>
 </body>
 </html>

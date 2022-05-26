@@ -2,6 +2,7 @@ const AuthController = require('./controllers/authController')
 const Controller = require('./controllers/controller')
 const express = require('express')
 const session = require('express-session')
+const checkIsLoggedIn = require('./middlewares/checkIsLogin')
 const AdminController = require('./controllers/adminController')
 const app = express()
 const port = 3000
@@ -27,12 +28,16 @@ app.post('/register', AuthController.registerUser);
 app.get('/login', AuthController.showLoginForm);
 app.post('/login', AuthController.loginUser);
 
-app.get('/admin/', AdminController.showAllMenus);
+app.use(checkIsLoggedIn);
+
+app.get('/logout', AuthController.logoutUser);
+// app.get('/admin/:UserId', AdminController.showDashboard);
+app.get('/admin', AdminController.showAllMenus);
 app.get('/admin/addMenu', AdminController.formAddMenu);
 app.post('/admin/addMenu', AdminController.addMenu);
 
 app.get('/admin/:menuId/edit', AdminController.formEditMenu);
-app.post('/admin/:menuId/edit', AdminController.formEditMenu);
+app.post('/admin/:menuId/edit', AdminController.updateMenu);
 
 app.get('/admin/:menuId/delete', AdminController.deleteMenu);
 

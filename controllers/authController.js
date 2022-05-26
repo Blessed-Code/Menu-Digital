@@ -57,9 +57,15 @@ class AuthController {
                 const isValidPassword = bcryptjs.compareSync(password, user.password);
 
                 req.session.userId = user.id
+                req.session.userEmail = user.email
+                req.session.role = user.role
 
                 if (isValidPassword) {
-                    return res.redirect(`/order`);
+                    if (user.role === "customer") {
+                        return res.redirect(`/order`);
+                    } else {
+                        return res.redirect(`/admin`);
+                    }
                 } else {
                     const error = "invalid username/password"
                     return res.redirect(`/login?error=${error}`);
@@ -72,6 +78,16 @@ class AuthController {
         })
         .catch(err => {
             res.send(err);
+        });
+    }
+
+    static logoutUser(req, res) {
+        req.session.destroy(err => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.redirect('/login');
+            }
         });
     }
 }
