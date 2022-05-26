@@ -2,6 +2,7 @@ const {User, MemberCard, Menu, Order, OrderMenu} = require("../models")
 const finalPrice = require("../helpers/totalPrice")
 const nodemailer = require('nodemailer');
 require('dotenv').config()
+const { Op } = require("sequelize")
 
 class Controller {
     static index(req, res) {
@@ -49,14 +50,16 @@ class Controller {
     static pageMenu(req, res){
         const UserId = req.session.userId
         const { OrderId } = req.params
-        let { err, category } = req.query
-        // console.log(err)
+        let { err, search } = req.query
+        console.log(search)
         let option = {}
 
-        if(category){
+        if(search){
             option = {
                 where: {
-                    category
+                    name: {
+                        [Op.iLike]: `%${search}%`
+                    }
                 }
             }
         }

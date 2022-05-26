@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: "Edit Menu"}); %>
+
+</head>
+<body>
+    <div class="container">
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Menu <u><%= menu.name %></u> Is Being Edited</h1>
+        </div>
+        <hr>
+        <form action="/admin/<%= menu.id %>/edit" method="post">
+            <div class="form-group">
+                <p>
+                    Name of The New Menu: </br>
+                    <input type="text" name="name" value="<%= menu.name %>" class="form-control" id="exampleFormControlInput1">
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    Category of The New Menu: </br>
+                    <select name="category" class="form-control" id="exampleFormControlSelect2">
+                        <option value="Food" <% menu.category === "Food" ? "selected" : "" %> >Food</option>
+                        <option value="Drink" <% menu.category === "Drink" ? "selected" : "" %> >Drink</option>
+                    </select>
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    Price of The New Menu: </br>
+                    <input type="number" name="price" value="<%= menu.price %>" class="form-control" id="exampleFormControlInput1">
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    Image Url of The New Menu: </br>
+                    <input type="text" name="imageUrl" value="<%= menu.imageUrl %>" class="form-control" id="exampleFormControlInput1">
+                </p>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">Edit Menu</button>
+        </form>
+    </div>
+</body>
+</html>
