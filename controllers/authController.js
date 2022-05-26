@@ -50,7 +50,7 @@ class AuthController {
 
     static loginUser(req, res) {
         const {fullName, password} = req.body;
-
+        
         User.findOne({where: {fullName}})
         .then(user => {
             if (user) {
@@ -59,7 +59,7 @@ class AuthController {
                 req.session.userId = user.id
 
                 if (isValidPassword) {
-                    return res.redirect(`/${user.id}/order`);
+                    return res.redirect(`/order`);
                 } else {
                     const error = "invalid username/password"
                     return res.redirect(`/login?error=${error}`);

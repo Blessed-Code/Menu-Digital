@@ -32,15 +32,16 @@ app.use(checkIsLoggedIn);
 app.get('/logout', AuthController.logoutUser);
 // app.get('/admin/:UserId', AdminController.showDashboard);
 
-app.get('/:UserId/order', Controller.pageOrders) 
-app.post('/:UserId/order', Controller.newOrder) //nge-create order
+app.get('/order', Controller.pageOrders) 
+app.get('/updateMember', Controller.updateMember)
+app.post('/order', Controller.newOrder) //nge-create order
 
-app.get('/:UserId/order/:OrderId', Controller.pageMenu) //tampilan kedua
-app.post('/:UserId/order/:OrderId', Controller.createOrderMenu) // create order menu
+app.get('/order/:OrderId', Controller.pageMenu) //tampilan kedua
+app.post('/order/:OrderId', Controller.createOrderMenu) // create order menu
 
-app.post('/:UserId/order/:OrderId/new', Controller.updateOrder)
+app.post('/order/:OrderId/new', Controller.updateOrder)
 
-app.post('/:UserId/order/:OrderId/delete', Controller.cancelOrder)
+app.post('/order/:OrderId/delete', Controller.cancelOrder)
 
 
 

@@ -10,7 +10,7 @@
 <body>
     <h1>Place your order here</h1>
     <hr>
-    <form action="/<%= UserId %>/order/<%= OrderId %>" method="get">
+    <form action="/order/<%= OrderId %>" method="get">
         <p>Search by Category Menu</p>
         <select name="category">
             <option value="">All</option>
@@ -22,7 +22,7 @@
     
     <br>
     <% if (err) { %>
-     <h2 style="color: red;"><%= err %> </h2>
+     <h2 style="color: red;">You have to order first to checkout</h2>
     <% } %>
     <br>
     <div class="card-columns">
@@ -34,7 +34,7 @@
                       <p class="card-text"> Category: <%= el.category %> </p>
                       <p class="card-text"> Price: <%= el.convertPrice() %> </p>
 
-                      <form action="/<%= UserId %>/order/<%= OrderId %>" method="post">
+                      <form action="/order/<%= OrderId %>" method="post">
                         <button name="MenuId" value="<%= el.id %>" type="submit">Order!</button>
                       </form>
                     </div>
@@ -42,10 +42,10 @@
         <% }) %>
     </div>
 
-    <form action="/<%= UserId %>/order/<%= OrderId %>/delete" method="post">
+    <form action="/order/<%= OrderId %>/delete" method="post">
         <button type="submit" class="btn btn-primary btn-lg btn-block">Cancel Order</button>
     </form>
-    <form action="/<%= UserId %>/order/<%= OrderId %>/new" method="post">
+    <form action="/order/<%= OrderId %>/new" method="post">
         <button type="submit" class="btn btn-primary btn-lg btn-block">Checkout</button>
     </form>
 </body>
