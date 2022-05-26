@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders</title>
+</head>
+<body>
+    <h1>Orders by <%= member.User.fullName %> with Member <%= member.type %></h1>
+    <hr>
+    
+    <form action="/<%= UserId %>/order" method="post">
+        <button type="submit">Create New Order</button>
+    </form>
+    <hr>
+    <form action="/<%= UserId %>/order" method="get">
+        <button type="submit" name="sort" value="exist" class="btn btn-outline-danger">Sort By Status</button>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Menu</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% const orders = member.User.Orders %> 
+            <% orders.forEach((order, i) => { %>
+             <tr>
+                 <td><%= i +1 %></td>
+                 <td><%= order.formattedDate(order.createdAt) %></td>
+                 <td><%= order.displayedStatus %></td>
+                 <td><% order.Menus.forEach(el => { %>
+                  <ul>
+                      <li><%= el.name %></li>
+                  </ul> 
+                 <% }) %></td>
+                 <% let totalPrice = 0; %> 
+                 <% order.Menus.forEach(el => { %>
+                  <% totalPrice += el.price %> 
+                 <% }) %>
+                 <td><%= finalPrice(totalPrice, member.type) %></td>
+             </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
