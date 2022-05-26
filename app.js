@@ -3,6 +3,8 @@ const Controller = require('./controllers/controller')
 const express = require('express')
 const session = require('express-session')
 const checkIsLoggedIn = require('./middlewares/checkIsLogin')
+const checkIsAdmin = require('./middlewares/checkIsAdmin')
+const checkIsCustomer = require('./middlewares/checkIsCustomer')
 const AdminController = require('./controllers/adminController')
 const app = express()
 const port = process.env.PORT || 3000
@@ -31,27 +33,28 @@ app.post('/login', AuthController.loginUser);
 app.use(checkIsLoggedIn);
 
 app.get('/logout', AuthController.logoutUser);
-// app.get('/admin/:UserId', AdminController.showDashboard);
-app.get('/admin', AdminController.showAllMenus);
-app.get('/admin/addMenu', AdminController.formAddMenu);
-app.post('/admin/addMenu', AdminController.addMenu);
 
-app.get('/admin/:menuId/edit', AdminController.formEditMenu);
-app.post('/admin/:menuId/edit', AdminController.updateMenu);
+app.get('/admin', checkIsAdmin, AdminController.showAllMenus);
 
-app.get('/admin/:menuId/delete', AdminController.deleteMenu);
+app.get('/admin/addMenu', checkIsAdmin, AdminController.formAddMenu);
+app.post('/admin/addMenu', checkIsAdmin, AdminController.addMenu);
+
+app.get('/admin/:menuId/edit', checkIsAdmin, AdminController.formEditMenu);
+app.post('/admin/:menuId/edit', checkIsAdmin, AdminController.updateMenu);
+
+app.get('/admin/:menuId/delete', checkIsAdmin, AdminController.deleteMenu);
 
 
-app.get('/order', Controller.pageOrders) 
-app.get('/updateMember', Controller.updateMember)
-app.post('/order', Controller.newOrder) //nge-create order
+app.get('/order', checkIsCustomer, Controller.pageOrders) 
+app.get('/updateMember', checkIsCustomer, Controller.updateMember)
+app.post('/order', checkIsCustomer, Controller.newOrder) //nge-create order
 
-app.get('/order/:OrderId', Controller.pageMenu) //tampilan kedua
-app.post('/order/:OrderId', Controller.createOrderMenu) // create order menu
+app.get('/order/:OrderId', checkIsCustomer, Controller.pageMenu) //tampilan kedua
+app.post('/order/:OrderId', checkIsCustomer, Controller.createOrderMenu) // create order menu
 
-app.get('/order/:OrderId/new', Controller.updateOrder)
+app.get('/order/:OrderId/new', checkIsCustomer, Controller.updateOrder)
 
-app.get('/order/:OrderId/delete', Controller.cancelOrder)
+app.get('/order/:OrderId/delete', checkIsCustomer, Controller.cancelOrder)
 
 
 

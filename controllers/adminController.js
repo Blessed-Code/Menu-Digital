@@ -3,9 +3,10 @@ const {User, MemberCard, Menu, Order, OrderMenu} = require("../models")
 class AdminController {
     static showAllMenus(req, res){
         let role = req.session.role;
+        const {error} = req.query
         Menu.findAll()
             .then((menus) => {
-                res.render('adm-Menus', {menus, role})
+                res.render('adm-Menus', {menus, role, error})
             })
             .catch((err) => {
                 res.send(err)

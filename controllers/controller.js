@@ -10,10 +10,9 @@ class Controller {
     }
 
     static pageOrders(req, res){
-        // console.log(req.params)
         const UserId = req.session.userId
-        // console.log(UserId)
         let role = req.session.role;
+        const {error} = req.query;
         const option = {
             where: {
                 UserId: +UserId
@@ -31,7 +30,8 @@ class Controller {
 
         MemberCard.findOne(option)
             .then((member) => {
-                res.render('orders', {member, finalPrice, role})
+                console.log(member, finalPrice, role, error);
+                res.render('orders', {member, finalPrice, role, error})
             })
             .catch((err) => {
                 res.send(err)
