@@ -11,14 +11,12 @@
             <h1 class="mb-3">Place Your Order Here</h1>
             <a href="/order/<%= OrderId %>" class="btn btn-light">Show All Menu</a>
         </div>
-        <hr>
         <form action="/order/<%= OrderId %>" method="get">
-            <div class="input-group">
-                <div class="form-outline">
-                    <input type="search" name="search" id="form1" class="form-control" />
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+            <div class="input-group mb-3">
+                <input name="search" type="text" class="form-control" placeholder="Search Menu..." aria-label="Search Menu" aria-describedby="button-addon2">
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
+              </div>
+            
         </form>
         <br>
         <br>
@@ -26,13 +24,13 @@
          <h2 style="color: red;">You have to order first to checkout</h2>
         <% } %>
         <br>
-        <div class="card-deck">
+        <div class="card-deck d-flex flex-wrap">
             <% menus.forEach(el => { %>
-                    <div class="card border-light mb-3" style="max-width: 18rem;">
+                    <div class="card mb-3 ms-5 me-5" style="max-width: 18rem;">
                         <div class="card-header">
                             <p class="card-text"> Category: <%= el.category %> </p>
                         </div>
-                        <img src="<%= el.imageUrl %>" alt="Menu" class="card-img-top">
+                        <img src="<%= el.imageUrl %>" alt="Menu" class="img-fluid img-thumbnail" width="300px" height="300px">
                         <div class="card-body text-center">
                           <h4 class="card-title"><%= el.name %> </h4>
                           <p class="card-text"> Price: <%= el.convertPrice() %> </p>
@@ -50,5 +48,7 @@
             <a href="/order/<%= OrderId %>/new" class="btn btn-outline-success" role="button"> Checkout </a>
         </div>
     </div>
+    <br>
+    <br>
 </body>
 </html>
