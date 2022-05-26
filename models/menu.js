@@ -19,10 +19,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Menu.init({
-    name: DataTypes.STRING,
-    imageUrl: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    category: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: {msg: "Name of the menu is required"},
+        notEmpty: {msg: "Name of the menu is required"}
+      }
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: {msg: "Image Link is required"},
+        notEmpty: {msg: "Image Link is required"},
+        isUrl: {msg: "The image link should be in link format"}
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {msg: "Price is required"},
+        min: {
+          args: [0],
+          msg: "The price should be more than 0 IDR"
+        }
+      }
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {msg: "Category Menu should be selected"},
+        notEmpty: {msg: "Category Menu should be selected"}
+      }
+    }
   }, {
     sequelize,
     modelName: 'Menu',

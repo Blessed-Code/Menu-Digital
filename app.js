@@ -2,6 +2,7 @@ const AuthController = require('./controllers/authController')
 const Controller = require('./controllers/controller')
 const express = require('express')
 const session = require('express-session')
+const AdminController = require('./controllers/adminController')
 const app = express()
 const port = 3000
 
@@ -26,7 +27,15 @@ app.post('/register', AuthController.registerUser);
 app.get('/login', AuthController.showLoginForm);
 app.post('/login', AuthController.loginUser);
 
-// app.get('/admin/:UserId', AdminController.showDashboard);
+app.get('/admin/', AdminController.showAllMenus);
+app.get('/admin/addMenu', AdminController.formAddMenu);
+app.post('/admin/addMenu', AdminController.addMenu);
+
+app.get('/admin/:menuId/edit', AdminController.formEditMenu);
+app.post('/admin/:menuId/edit', AdminController.formEditMenu);
+
+app.get('/admin/:menuId/delete', AdminController.deleteMenu);
+
 
 app.get('/order', Controller.pageOrders) 
 app.get('/updateMember', Controller.updateMember)
@@ -35,9 +44,9 @@ app.post('/order', Controller.newOrder) //nge-create order
 app.get('/order/:OrderId', Controller.pageMenu) //tampilan kedua
 app.post('/order/:OrderId', Controller.createOrderMenu) // create order menu
 
-app.post('/order/:OrderId/new', Controller.updateOrder)
+app.get('/order/:OrderId/new', Controller.updateOrder)
 
-app.post('/order/:OrderId/delete', Controller.cancelOrder)
+app.get('/order/:OrderId/delete', Controller.cancelOrder)
 
 
 

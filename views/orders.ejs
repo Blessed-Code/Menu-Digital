@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Orders</title>
+    <%- include('partials/head', {title: "Your Orders"}); %>
+
 </head>
 <body>
-    <h1>Orders by <%= member.User.fullName %> with Member <%= member.type %></h1>
-    <% if (member.type === 'Regular') { %>
-        <h4>You Will Got 15% Discount for Every Purchase If You Upgrade Your Member Card to Gold, It Only Costs 100.000 IDR/month, Join Gold Member Now!</h4>
-        <a href="/updateMember">Join Gold Member</a>
-    <% } %>
-    <hr>
-    
-    <form action="/order" method="post">
-        <button type="submit">Create New Order</button>
-    </form>
-    <hr>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Menu</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% const orders = member.User.Orders %> 
-            <% orders.forEach((order, i) => { %>
-             <tr>
-                 <td><%= i +1 %></td>
-                 <td><%= order.formattedDate(order.createdAt) %></td>
-                 <td><%= order.displayedStatus %></td>
-                 <td><% order.Menus.forEach(el => { %>
-                  <ul>
-                      <li><%= el.name %></li>
-                  </ul> 
-                     <% }) %></td>
-                 <td><%= finalPrice(order.totalPrice) %></td>
-             </tr>
-            <% }) %>
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Orders By <em><%= member.User.fullName %></em> with Member <mark><%= member.type %></mark></h1>
+            <% if (member.type === 'Regular') { %>
+                <h4 class="text-muted">You Will Got 15% Discount for Every Purchase If You Upgrade Your Member Card to Gold, It Only Costs 100.000 IDR/month, Join Gold Member Now!</h4>
+                <a href="/updateMember" class="btn btn-warning">Join Gold Member</a>
+            <% } %>
+        </div>
+        <hr>
+        
+        <div class="container">
+            <form action="/order" method="post">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">Create New Order</button>
+            </form>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Menu</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% const orders = member.User.Orders %> 
+                    <% orders.forEach((order, i) => { %>
+                     <tr>
+                         <td><%= i +1 %></td>
+                         <td><%= order.formattedDate(order.createdAt) %></td>
+                         <td><%= order.displayedStatus %></td>
+                         <td><% order.Menus.forEach(el => { %>
+                          <ul>
+                              <li><%= el.name %></li>
+                          </ul> 
+                             <% }) %></td>
+                         <td><%= finalPrice(order.totalPrice) %></td>
+                     </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
