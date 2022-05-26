@@ -1,13 +1,32 @@
+const AuthController = require('./controllers/authController')
 const Controller = require('./controllers/controller')
 const express = require('express')
+const session = require('express-session')
 const app = express()
 const port = 3000
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: false}))
+app.use(session({
+  secret: 'user-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    sameSite: true
+  }
+}));
 
 // routings
 app.get('/', Controller.index)
+
+app.get('/register', AuthController.showRegisterForm);
+app.post('/register', AuthController.registerUser);
+
+app.get('/login', AuthController.showLoginForm);
+app.post('/login', AuthController.loginUser);
+
+// app.get('/admin/:UserId', AdminController.showDashboard);
 
 app.get('/:UserId/order', Controller.pageOrders) 
 app.post('/:UserId/order', Controller.newOrder) //nge-create order
