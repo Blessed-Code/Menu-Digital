@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: "Add New Menu"}); %>
+
+</head>
+<body>
+    <div class="container">
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Form Add New Menu</h1>
+        </div>
+        <hr>
+
+        <form action="/admin/addMenu" method="post">
+            <div class="form-group">
+                <p>
+                    Name of The New Menu: </br>
+                    <input type="text" name="name" class="form-control" id="exampleFormControlInput1">
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    Category of The New Menu: </br>
+                    <select name="category" class="form-control" id="exampleFormControlSelect2">
+                        <option selected disabled>Choose Category...</option>
+                        <option value="Food">Food</option>
+                        <option value="Drink">Drink</option>
+                    </select>
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    Price of The New Menu: </br>
+                    <input type="number" name="price" class="form-control" id="exampleFormControlInput1">
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                    Image Url of The New Menu: </br>
+                    <input type="text" name="imageUrl" class="form-control" id="exampleFormControlInput1">
+                </p>
+            </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Submit New Menu!</button>
+    </form>
+    </div>
+</body>
+</html>

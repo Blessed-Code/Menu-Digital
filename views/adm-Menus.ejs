@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: "All Menus"}); %>
+</head>
+<body>
+    <div class="container">
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Menus in Our Resto</h1>
+        </div>
+        <hr>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="/admin/addMenu" class="btn btn-outline-secondary">Add New Menu</a>
+        </div>
+        <br>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col" style="width: 20%;">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% menus.forEach(menu => { %>
+                 <tr>
+                     <td><%= menu.name %></td>
+                     <td><img src="<%= menu.imageUrl %>" alt="<%= menu.name %> Image" width="100%" class="img-thumbnail"></td>
+                     <td><%= menu.convertPrice() %></td>
+                     <td><%= menu.category %></td>
+                     <td>
+                         <div class="d-grid gap-2">
+                             <a href="/admin/<%= menu.id %>/edit" class="btn btn-outline-info">Edit</a>
+                             <a href="/admin/<%= menu.id %>/delete" class="btn btn-outline-danger">Delete</a>
+                         </div>
+                     </td>
+                 </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

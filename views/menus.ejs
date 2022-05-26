@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <title>All Menus</title>
+    <%- include('partials/head', {title: "All Menus"}); %>
+
 </head>
 <body>
-    <h1>Place your order here</h1>
-    <hr>
-    <form action="/order/<%= OrderId %>" method="get">
-        <p>Search by Category Menu</p>
-        <select name="category">
-            <option value="">All</option>
-            <option value="Food">Food</option>
-            <option value="Drink">Drink</option>
-        </select>
-        <button type="submit">Search</button>
-    </form>
-    
-    <br>
-    <% if (err) { %>
-     <h2 style="color: red;">You have to order first to checkout</h2>
-    <% } %>
-    <br>
-    <div class="card-columns">
-        <% menus.forEach(el => { %>
-                <div class="card" style="width:300px">
-                    <img src="<%= el.imageUrl %>" alt="Menu" style="width:100%">
-                    <div class="card-body text-center">
-                      <h4 class="card-title"><%= el.name %> </h4>
-                      <p class="card-text"> Category: <%= el.category %> </p>
-                      <p class="card-text"> Price: <%= el.convertPrice() %> </p>
-
-                      <form action="/order/<%= OrderId %>" method="post">
-                        <button name="MenuId" value="<%= el.id %>" type="submit">Order!</button>
-                      </form>
-                    </div>
-                </div>     
-        <% }) %>
+    <div class="container">
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Place Your Order Here</h1>
+            <a href="/order/<%= OrderId %>" class="btn btn-light">Show All Menu</a>
+        </div>
+        <hr>
+        <form action="/order/<%= OrderId %>" method="get">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input type="search" name="search" id="form1" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+        <br>
+        <br>
+        <% if (err) { %>
+         <h2 style="color: red;">You have to order first to checkout</h2>
+        <% } %>
+        <br>
+        <div class="card-deck">
+            <% menus.forEach(el => { %>
+                    <div class="card border-light mb-3" style="max-width: 18rem;">
+                        <div class="card-header">
+                            <p class="card-text"> Category: <%= el.category %> </p>
+                        </div>
+                        <img src="<%= el.imageUrl %>" alt="Menu" class="card-img-top">
+                        <div class="card-body text-center">
+                          <h4 class="card-title"><%= el.name %> </h4>
+                          <p class="card-text"> Price: <%= el.convertPrice() %> </p>
+                            <div class="card-footer">
+                                <form action="/order/<%= OrderId %>" method="post">
+                                  <button name="MenuId" value="<%= el.id %>" type="submit" class="btn btn-outline-dark">Order!</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>     
+            <% }) %>
+        </div>
+        <div class="d-grid gap-2">
+            <a href="/order/<%= OrderId %>/delete" class="btn btn-outline-danger" role="button"> Cancel Order </a>
+            <a href="/order/<%= OrderId %>/new" class="btn btn-outline-success" role="button"> Checkout </a>
+        </div>
     </div>
-
-    <form action="/order/<%= OrderId %>/delete" method="post">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Cancel Order</button>
-    </form>
-    <form action="/order/<%= OrderId %>/new" method="post">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Checkout</button>
-    </form>
 </body>
 </html>
