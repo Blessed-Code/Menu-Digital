@@ -37,6 +37,10 @@ class AuthController {
                 if (err.name === "SequelizeValidationError") {
                     err = err.errors.map(e => e.message);
                 }
+
+                if (err.name === "SequelizeUniqueConstraintError") {
+                    err = err.errors.map(e => e.message);
+                }
                 res.send(err);
             });
         }
