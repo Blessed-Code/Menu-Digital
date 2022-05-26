@@ -57,6 +57,7 @@ class AuthController {
                 const isValidPassword = bcryptjs.compareSync(password, user.password);
 
                 req.session.userId = user.id
+                req.session.userEmail = user.email
 
                 if (isValidPassword) {
                     return res.redirect(`/order`);
