@@ -10,10 +10,6 @@
             <a class="nav-link" href="/">Home</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
-          </li>
-
           <% if (role === "admin") { %>
             <li class="nav-item">
               <a class="nav-link" href="#">Add Menu</a>
@@ -24,6 +20,10 @@
             <a class="nav-link" href="#"></a>
           </li> -->
         </ul>
+
+        <% if (role === "admin" || role === "customer") { %>
+          <a class="btn btn-outline-danger" href="/logout">Logout</a>
+        <% } %>
       </div>
     </div>
   </nav> 
