@@ -13,6 +13,7 @@ class Controller {
         // console.log(req.params)
         const UserId = req.session.userId
         // console.log(UserId)
+        let role = req.session.role;
         const option = {
             where: {
                 UserId: +UserId
@@ -30,7 +31,7 @@ class Controller {
 
         MemberCard.findOne(option)
             .then((member) => {
-                res.render('orders', {member, finalPrice})
+                res.render('orders', {member, finalPrice, role})
             })
             .catch((err) => {
                 res.send(err)
@@ -51,6 +52,7 @@ class Controller {
         const UserId = req.session.userId
         const { OrderId } = req.params
         let { err, search } = req.query
+        let role = req.session.role;
         console.log(search)
         let option = {}
 
@@ -66,7 +68,7 @@ class Controller {
         
         Menu.findAll(option)
             .then((menus) => {
-                res.render('menus', {menus, UserId, OrderId, err})
+                res.render('menus', {menus, UserId, OrderId, err, role})
             })
             .catch((err) => {
                 res.send(err)

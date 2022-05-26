@@ -32,12 +32,12 @@ app.use(checkIsLoggedIn);
 
 app.get('/logout', AuthController.logoutUser);
 // app.get('/admin/:UserId', AdminController.showDashboard);
-app.get('/admin/', AdminController.showAllMenus);
+app.get('/admin', AdminController.showAllMenus);
 app.get('/admin/addMenu', AdminController.formAddMenu);
 app.post('/admin/addMenu', AdminController.addMenu);
 
 app.get('/admin/:menuId/edit', AdminController.formEditMenu);
-app.post('/admin/:menuId/edit', AdminController.formEditMenu);
+app.post('/admin/:menuId/edit', AdminController.updateMenu);
 
 app.get('/admin/:menuId/delete', AdminController.deleteMenu);
 

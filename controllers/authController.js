@@ -58,9 +58,14 @@ class AuthController {
 
                 req.session.userId = user.id
                 req.session.userEmail = user.email
+                req.session.role = user.role
 
                 if (isValidPassword) {
-                    return res.redirect(`/order`);
+                    if (user.role === "customer") {
+                        return res.redirect(`/order`);
+                    } else {
+                        return res.redirect(`/admin`);
+                    }
                 } else {
                     const error = "invalid username/password"
                     return res.redirect(`/login?error=${error}`);

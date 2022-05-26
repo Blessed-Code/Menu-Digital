@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <%- include('partials/head', {title: "Your Orders"}); %>
-
 </head>
 <body>
+    <%- include('partials/navbar', {role: role}); %>
     <div class="container">
-        <div class="p-5 text-center bg-light">
+        <div class="p-5 text-center">
             <h1 class="mb-3">Orders By <em><%= member.User.fullName %></em> with Member <mark><%= member.type %></mark></h1>
             <% if (member.type === 'Regular') { %>
                 <h4 class="text-muted">You Will Got 15% Discount for Every Purchase If You Upgrade Your Member Card to Gold, It Only Costs 100.000 IDR/month, Join Gold Member Now!</h4>

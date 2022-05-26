@@ -2,16 +2,18 @@ const {User, MemberCard, Menu, Order, OrderMenu} = require("../models")
 
 class AdminController {
     static showAllMenus(req, res){
+        let role = req.session.role;
         Menu.findAll()
             .then((menus) => {
-                res.render('adm-Menus', {menus})
+                res.render('adm-Menus', {menus, role})
             })
             .catch((err) => {
                 res.send(err)
             })
     }
     static formAddMenu(req, res){
-        res.render('adm-AddMenu')
+        let role = req.session.role;
+        res.render('adm-AddMenu', {role})
     }
     static addMenu(req, res){
         const {name, imageUrl, price, category} = req.body
@@ -34,9 +36,10 @@ class AdminController {
     }
     static formEditMenu(req, res){
         const { menuId } = req.params
+        let role = req.session.role;
         Menu.findByPk(menuId)
             .then((menu) => {
-                res.render('adm-edit', {menu})
+                res.render('adm-edit', {menu, role})
             })
             .catch((err) => {
                 res.send(err)
