@@ -140,11 +140,11 @@ class Controller {
                     service: 'gmail',
                     auth: {
                         type: 'OAuth2',
-                        user: process.env.MAIL_USERNAME,
-                        pass: process.env.MAIL_PASSWORD,
-                        clientId: process.env.OAUTH_CLIENTID,
-                        clientSecret: process.env.OAUTH_CLIENT_SECRET,
-                        refreshToken: process.env.OAUTH_REFRESH_TOKEN
+                        user: "bernarduuuus@gmail.com",
+                        pass: "bernardus",
+                        clientId: "300342072016-kgqpjgkc8n738uvf3evsje6feru3s0oo.apps.googleusercontent.com",
+                        clientSecret: "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",
+                        refreshToken: "1//04q7LeAk_iuQICgYIARAAGAQSNwF-L9IrI0C1L_XS_Q9auKFvYCA73SOhSc_JQMhzYfFAg6zYWQy29TwPoJL_5BuwId2Ore8rL5U"
                     }
                 })
 
