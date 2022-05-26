@@ -13,8 +13,6 @@ module.exports = {
     */
    const data = [
      {OrderId: 1, MenuId: 2, createdAt: new Date(), updatedAt: new Date()},
-     {OrderId: 1, MenuId: 2, createdAt: new Date(), updatedAt: new Date()},
-     {OrderId: 1, MenuId: 2, createdAt: new Date(), updatedAt: new Date()},
      {OrderId: 2, MenuId: 2, createdAt: new Date(), updatedAt: new Date()},
      {OrderId: 2, MenuId: 1, createdAt: new Date(), updatedAt: new Date()},
      {OrderId: 1, MenuId: 1, createdAt: new Date(), updatedAt: new Date()}
