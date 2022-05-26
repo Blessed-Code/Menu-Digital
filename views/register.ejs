@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', {title: "Registrasi User"}); %>
+<body>
+    <%- include('partials/navbar', {role: ""}); %>
+    <div class="mt-5 mb-5 p-5 border" 
+    style="margin-left: 500px;
+           margin-right: 500px;">
+        
+        <div class="text-center">
+            <h1>Register User</h1>
+        </div>
+
+        <form action="/register" method="post">
+            <div class="mb-3">
+                <label for="fullName" class="form-label">Username</label>
+                <input type="text" name="fullName" id="fullName" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select name="role" id="role" class="form-select">
+                    <option value="" selected disabled>Choose...</option>
+                    <% ["customer", "admin"].forEach(element => { %>
+                        <option value="<%=element%>"><%=element%></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success btn-lg">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

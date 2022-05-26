@@ -10,17 +10,17 @@ class Controller {
             res.render('home')
         }
 
-        User.findOne({
-            where: {
-                email: email
-            }
-        })            
-            .then((user) => {
-                res.redirect(`/${user.id}/order`)
-            })
-            .catch((err) => {
-                res.send(err)
-            })
+        // User.findOne({
+        //     where: {
+        //         email: email
+        //     }
+        // })            
+        //     .then((user) => {
+        //         res.redirect(`/${user.id}/order`)
+        //     })
+        //     .catch((err) => {
+        //         res.send(err)
+        //     })
     }
 
     static pageOrders(req, res){

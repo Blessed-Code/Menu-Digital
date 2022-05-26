@@ -1,5 +1,7 @@
+const AuthController = require('./controllers/authController')
 const Controller = require('./controllers/controller')
 const express = require('express')
+const session = require('express-session')
 const app = express()
 const port = 3000
 
