@@ -5,7 +5,7 @@ const session = require('express-session')
 const checkIsLoggedIn = require('./middlewares/checkIsLogin')
 const AdminController = require('./controllers/adminController')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: false}))
