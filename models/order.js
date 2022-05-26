@@ -26,10 +26,19 @@ module.exports = (sequelize, DataTypes) => {
     formattedDate(date){
       return date.toLocaleDateString('id-ID', { weekday:"long", year:"numeric", month:"short", day:"numeric"})
     }
+    static priceByMember(price, member){
+      if(member === "Gold"){
+        const output = price - price*0.15
+        return output
+      }else{
+        return price
+      }
+    }
   }
   Order.init({
     status: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    totalPrice: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Order',

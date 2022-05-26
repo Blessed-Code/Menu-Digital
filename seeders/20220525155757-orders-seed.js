@@ -12,11 +12,11 @@ module.exports = {
      * }], {});
     */
    const data = [
-     {status: "completed", UserId: 2, createdAt: new Date(), updatedAt: new Date()},
-     {status: "completed", UserId: 2, createdAt: new Date(), updatedAt: new Date()},
-     {status: "completed", UserId: 1, createdAt: new Date(), updatedAt: new Date()},
-     {status: "completed", UserId: 1, createdAt: new Date(), updatedAt: new Date()},
-     {status: "completed", UserId: 3, createdAt: new Date(), updatedAt: new Date()}
+     {status: "completed", UserId: 2, totalPrice: 125000, createdAt: new Date(), updatedAt: new Date()},
+     {status: "completed", UserId: 2, totalPrice: 55000,  createdAt: new Date(), updatedAt: new Date()},
+     {status: "completed", UserId: 1, totalPrice: 0,  createdAt: new Date(), updatedAt: new Date()},
+     {status: "completed", UserId: 1, totalPrice: 0,  createdAt: new Date(), updatedAt: new Date()},
+     {status: "completed", UserId: 3, totalPrice: 0,  createdAt: new Date(), updatedAt: new Date()}
    ]
    return queryInterface.bulkInsert('Orders', data, {})
   },

@@ -8,15 +8,18 @@
 </head>
 <body>
     <h1>Orders by <%= member.User.fullName %> with Member <%= member.type %></h1>
+    <% if (member.type === 'Reguler') { %>
+        <h4>You Will Got 15% Discount for Every Purchase If You Upgrade Your Member Card to Gold, It Only Costs 100.000 IDR/month, Join Gold Member Now!</h4>
+        <form action="/<%= UserId %>/order" method="get">
+            <button type="submit" name="memberCard" value="Gold">Join Gold Member</button>
+        </form>
+    <% } %>
     <hr>
     
     <form action="/<%= UserId %>/order" method="post">
         <button type="submit">Create New Order</button>
     </form>
     <hr>
-    <form action="/<%= UserId %>/order" method="get">
-        <button type="submit" name="sort" value="exist" class="btn btn-outline-danger">Sort By Status</button>
-    </form>
 
     <table border="1">
         <thead>
@@ -39,12 +42,8 @@
                   <ul>
                       <li><%= el.name %></li>
                   </ul> 
-                 <% }) %></td>
-                 <% let totalPrice = 0; %> 
-                 <% order.Menus.forEach(el => { %>
-                  <% totalPrice += el.price %> 
-                 <% }) %>
-                 <td><%= finalPrice(totalPrice, member.type) %></td>
+                     <% }) %></td>
+                 <td><%= finalPrice(order.totalPrice) %></td>
              </tr>
             <% }) %>
         </tbody>
