@@ -8,15 +8,13 @@
 </head>
 <body>
     <h1>Orders by <%= member.User.fullName %> with Member <%= member.type %></h1>
-    <% if (member.type === 'Reguler') { %>
+    <% if (member.type === 'Regular') { %>
         <h4>You Will Got 15% Discount for Every Purchase If You Upgrade Your Member Card to Gold, It Only Costs 100.000 IDR/month, Join Gold Member Now!</h4>
-        <form action="/<%= UserId %>/order" method="get">
-            <button type="submit" name="memberCard" value="Gold">Join Gold Member</button>
-        </form>
+        <a href="/updateMember">Join Gold Member</a>
     <% } %>
     <hr>
     
-    <form action="/<%= UserId %>/order" method="post">
+    <form action="/order" method="post">
         <button type="submit">Create New Order</button>
     </form>
     <hr>
